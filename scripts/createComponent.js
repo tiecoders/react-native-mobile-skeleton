@@ -3,7 +3,7 @@ import readline from 'readline'
 import replace from 'replace-in-file'
 import chalk from 'chalk'
 
-const typesWhitelist = [ 'atom', 'molecule', 'organism', 'modals', 'pages' ]
+const typesWhitelist = [ 'atom', 'molecule', 'organism', 'modals', 'screens' ]
 
 // Log a message in console
 const log = (type, title, details = null) => {
