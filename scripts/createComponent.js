@@ -25,8 +25,7 @@ const rl = readline.createInterface({
 
 const component = {
     name: null,
-    type: null,
-    element: null
+    type: null
 }
 
 const componentName = () => new Promise(resolve => {
@@ -48,15 +47,8 @@ const componentType = () => new Promise((resolve, reject) => {
     })
 }).catch(error => { })
 
-const componentElement = () => new Promise(resolve => {
-    rl.question('Elément racine (div, span, button ...) [div]: ', answer => {
-        component.element = answer || 'div'
-        resolve()
-    })
-}).catch(error => { })
-
 const renameComponent = (source, component) => {
-    const { name, element } = component
+    const { name } = component
 
     fs.renameSync(`${source}/Component.js`, `${source}/${name}.js`)
     fs.renameSync(`${source}/styles/Component.style.js`, `${source}/styles/${name}.style.js`)
@@ -65,12 +57,6 @@ const renameComponent = (source, component) => {
         files: `${source}/${name}.js`,
         from: /_ComponentName/g,
         to: name
-    })
-
-    replace.sync({
-        files: `${source}/${name}.js`,
-        from: /_element/g,
-        to: element
     })
 
     replace.sync({
@@ -95,7 +81,6 @@ const main = async() => {
     }
 
     await componentType()
-    await componentElement()
 
     const source = 'templates/component'
     const destination = `src/components/${component.type}/${component.name}`
