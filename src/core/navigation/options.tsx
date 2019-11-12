@@ -12,6 +12,7 @@ import {
   RouteState,
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
+import {MenuContainer} from "../../containers/menu";
 
 export type TopNavigationElement = React.ReactElement<any>;
 export type BottomNavigationElement = React.ReactElement<any>;
@@ -43,12 +44,15 @@ const MenuTopNavigationParams: TopNavigationParams = {
   },
 };
 
-export const MenuNavigationOptions: NavigationParams = {
-  ...MenuTopNavigationParams
+const MenuBottomNavigationParams: BottomNavigationParams = {
+  bottomNavigation: (props: NavigationTabScreenProps): BottomNavigationElement => {
+    return (
+        <MenuContainer {...props} />
+    );
+  },
 };
 
-export const SocialNavigationOptions: NavigationParams = MenuTopNavigationParams;
-
-export const ArticlesNavigationOptions: NavigationParams = MenuTopNavigationParams;
-
-export const DashboardNavigationOptions: NavigationParams = MenuTopNavigationParams;
+export const MenuNavigationOptions: NavigationParams = {
+  ...MenuTopNavigationParams,
+  ...MenuBottomNavigationParams
+};

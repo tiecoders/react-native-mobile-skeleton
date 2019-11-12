@@ -1,29 +1,50 @@
 import React from 'react'
-import { useScreens } from 'react-native-screens'
+import {useScreens} from 'react-native-screens'
 import {
-  createAppContainer,
-  NavigationContainer, NavigationRouteConfigMap
+    createAppContainer,
+    NavigationContainer, NavigationRouteConfigMap
 } from 'react-navigation'
 import {
-  createStackNavigator, NavigationStackProp,
+    createStackNavigator, NavigationStackProp,
 } from 'react-navigation-stack'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
+import {createBottomTabNavigator} from 'react-navigation-tabs'
 import HomeScreen from '../../components/screens/HomeScreen'
 import {MenuNavigationOptions} from "./options";
+import {MenuContainer} from "../../containers/menu";
+
+const MainNavigationConfiguration: NavigationRouteConfigMap<any, NavigationStackProp> = {
+    ['HomePage']: HomeScreen
+};
+
+const BottomTabMenuStackNavigator: NavigationContainer = createStackNavigator(
+    {
+      ['First']: HomeScreen,
+      ['Second']: HomeScreen,
+      ['Third']: HomeScreen
+    },
+    {
+      defaultNavigationOptions: MenuNavigationOptions,
+    },
+);
+
+const BottomTabMenuNavigator = createBottomTabNavigator({
+    BottomTabMenuStackNavigator
+}, {
+    tabBarComponent: MenuContainer
+});
 
 const AppNavigator: NavigationContainer = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    title: 'Home Screen'
-  }
+    BottomTabMenuNavigator,
+    ...MainNavigationConfiguration
 }, {
-  initialRouteName: 'Home',
-  defaultNavigationOptions: MenuNavigationOptions
+    defaultNavigationOptions: {
+        header: null,
+    }
 })
 
 const createAppRouter = (container: NavigationContainer): NavigationContainer => {
-  useScreens();
-  return createAppContainer(container);
+    useScreens();
+    return createAppContainer(container);
 }
 
 

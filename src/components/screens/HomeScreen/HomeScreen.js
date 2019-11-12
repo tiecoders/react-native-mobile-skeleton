@@ -13,7 +13,7 @@ import styles from './styles'
 class HomeScreen extends React.Component{
 
     render = () => (
-        <></>
+        <Text>Hello</Text>
     )
 }
 
