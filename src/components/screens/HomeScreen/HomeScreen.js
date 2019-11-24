@@ -12,6 +12,12 @@ import styles from './styles'
 
 class HomeScreen extends React.Component{
 
+    componentDidMount() {
+        this.props.navigation.navigate({
+            routeName: 'Second'
+        });
+    }
+
     render = () => (
         <Text>Hello</Text>
     )

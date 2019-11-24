@@ -8,38 +8,21 @@ import {
     createStackNavigator, NavigationStackProp,
 } from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
-import HomeScreen from '../../components/screens/HomeScreen'
 import {MenuNavigationOptions} from "./options";
 import {MenuContainer} from "../../containers/menu";
+import {routes} from '../../config'
 
-const MainNavigationConfiguration: NavigationRouteConfigMap<any, NavigationStackProp> = {
-    ['HomePage']: HomeScreen
-};
+const MainNavigationConfiguration: NavigationRouteConfigMap<any, NavigationStackProp> = routes.navigation;
 
-const BottomTabMenuStackNavigator: NavigationContainer = createStackNavigator(
-    {
-      ['First']: HomeScreen,
-      ['Second']: HomeScreen,
-      ['Third']: HomeScreen
-    },
-    {
-      defaultNavigationOptions: MenuNavigationOptions,
-    },
-);
-
-const BottomTabMenuNavigator = createBottomTabNavigator({
-    BottomTabMenuStackNavigator
-}, {
+const BottomMenuNavigator = createBottomTabNavigator(routes.bottom,{
     tabBarComponent: MenuContainer
 });
 
 const AppNavigator: NavigationContainer = createStackNavigator({
-    BottomTabMenuNavigator,
+    BottomMenuNavigator,
     ...MainNavigationConfiguration
 }, {
-    defaultNavigationOptions: {
-        header: null,
-    }
+    defaultNavigationOptions: MenuNavigationOptions
 })
 
 const createAppRouter = (container: NavigationContainer): NavigationContainer => {
