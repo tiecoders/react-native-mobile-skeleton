@@ -50,23 +50,23 @@ const componentType = () => new Promise((resolve, reject) => {
 const renameComponent = (source, component) => {
     const { name } = component
 
-    fs.renameSync(`${source}/Component.js`, `${source}/${name}.js`)
-    fs.renameSync(`${source}/styles/Component.style.js`, `${source}/styles/${name}.style.js`)
+    fs.renameSync(`${source}/Component.tsx`, `${source}/${name}.tsx`)
+    fs.renameSync(`${source}/styles/Component.style.tsx`, `${source}/styles/${name}.style.tsx`)
 
     replace.sync({
-        files: `${source}/${name}.js`,
+        files: `${source}/${name}.tsx`,
         from: /_ComponentName/g,
         to: name
     })
 
     replace.sync({
-        files: `${source}/index.js`,
+        files: `${source}/index.tsx`,
         from: /_ComponentName/g,
         to: `${name}`
     })
 
     replace.sync({
-        files: `${source}/styles/index.js`,
+        files: `${source}/styles/index.tsx`,
         from: /_ComponentName/g,
         to: name
     })

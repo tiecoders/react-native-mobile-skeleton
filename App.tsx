@@ -68,12 +68,13 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <ApplicationLoader assets={assets}>
-                    <IconRegistry icons={EvaIconsPack}/><ThemeContext.Provider value={contextValue}>
-                    <ApplicationProvider mapping={mapping} theme={lightTheme}>
-                    <DynamicStatusBar currentTheme={contextValue.currentTheme}/>
-                    <ApplicationContent/>
-                </ApplicationProvider>
-                </ThemeContext.Provider>
+                    <IconRegistry icons={EvaIconsPack}/>
+                    <ThemeContext.Provider value={contextValue}>
+                        <ApplicationProvider mapping={mapping} theme={lightTheme}>
+                            <DynamicStatusBar currentTheme={contextValue.currentTheme}/>
+                            <ApplicationContent/>
+                        </ApplicationProvider>
+                    </ThemeContext.Provider>
                 </ApplicationLoader>
             </Provider>)
     }

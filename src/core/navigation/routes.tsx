@@ -19,8 +19,8 @@ const BottomMenuNavigator = createBottomTabNavigator(routes.bottom,{
 });
 
 const AppNavigator: NavigationContainer = createStackNavigator({
-    BottomMenuNavigator,
-    ...MainNavigationConfiguration
+    ...MainNavigationConfiguration,
+    BottomMenuNavigator
 }, {
     defaultNavigationOptions: MenuNavigationOptions
 })

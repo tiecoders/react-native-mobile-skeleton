@@ -1,14 +1,13 @@
-import SignIn from "../components/screens/SignIn";
 import HomeScreen from "../components/screens/HomeScreen";
+import {SignInScreen} from "../components/screens/SignInScreen/SignInScreen";
 
 const routes = {
     navigation: {
+        signIn: SignInScreen,
         home: HomeScreen,
-        signIn: SignIn
     },
     bottom:{
-        home: HomeScreen,
-        signIn: SignIn
+        home: HomeScreen
     }
 }
 
