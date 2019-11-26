@@ -1,4 +1,6 @@
 import React from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+
 import {
   ListRenderItemInfo,
   Dimensions,
@@ -67,10 +69,10 @@ class ComponentsListComponent extends React.Component<ComponentsListProps> {
 export const ComponentsList = withStyles(ComponentsListComponent, (theme: ThemeType) => ({
   item: {
     flex: 1,
-    height: 160,
+    height: scale(160),
     maxWidth: itemWidth,
-    marginHorizontal: 8,
-    marginVertical: 8,
+    marginHorizontal: moderateScale(18),
+    marginVertical: verticalScale(8),
   },
   columnWrapperStyle: {
     justifyContent: 'space-between',

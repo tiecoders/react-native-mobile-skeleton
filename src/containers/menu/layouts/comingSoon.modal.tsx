@@ -1,4 +1,5 @@
 import React from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {
   View,
   Dimensions,
@@ -58,17 +59,17 @@ class ComingSoonModalComponent extends React.Component<ComingSoonModalProps> {
 
 export const ComingSoonModal = withStyles(ComingSoonModalComponent, (theme: ThemeType) => {
   const dimensions: ScaledSize = Dimensions.get('window');
-  const contentWidth: number = dimensions.width - 24;
-  const contentHeight: number = 192;
+  const contentWidth: number = dimensions.width - scale(24);
+  const contentHeight: number = scale(192);
 
   return {
     container: {
       zIndex: 1,
       justifyContent: 'space-between',
-      padding: 24,
+      padding: moderateScale(24),
       width: contentWidth,
       height: contentHeight,
-      borderRadius: 12,
+      borderRadius: moderateScale(12),
       top: (dimensions.height - contentHeight) / 2,
       left: (dimensions.width - contentWidth) / 2,
       backgroundColor: theme['background-basic-color-3'],
@@ -79,7 +80,7 @@ export const ComingSoonModal = withStyles(ComingSoonModalComponent, (theme: Them
     },
     titleLabel: textStyle.headline,
     descriptionLabel: {
-      marginTop: 24,
+      marginTop: scale(24),
       ...textStyle.paragraph,
     },
   };

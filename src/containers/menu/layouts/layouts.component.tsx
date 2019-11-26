@@ -4,6 +4,7 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from 'react-native-ui-kitten';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import { LayoutsList } from '../../../components/menu';
 import { LayoutsData } from './type';
 
@@ -37,13 +38,13 @@ export const Layouts = withStyles(LayoutsComponent, (theme: ThemeType) => ({
   container: {
   },
   contentContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(16),
   },
   item: {
     flex: 1,
-    height: 160,
-    marginHorizontal: 8,
-    marginVertical: 8,
+    height: scale(16),
+    marginHorizontal: scale(8),
+    marginVertical: scale(8)
   },
 }));

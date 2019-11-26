@@ -1,4 +1,5 @@
 import React from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import { ListRenderItemInfo } from 'react-native';
 import {
   List,
@@ -80,11 +81,11 @@ export const Themes = withStyles(ThemesComponent, (theme: ThemeType) => ({
     flex: 1,
   },
   contentContainer: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingVertical: scale(12),
+    paddingHorizontal: scale(24),
     backgroundColor: theme['background-basic-color-2'],
   },
   item: {
-    marginVertical: 8,
+    marginVertical: scale(8),
   },
 }));

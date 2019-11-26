@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {
   withStyles,
   ThemeType,
@@ -44,7 +45,7 @@ export const Components = withStyles(ComponentsComponent, (theme: ThemeType) => 
     backgroundColor: theme['background-basic-color-2'],
   },
   contentContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(16),
   },
 }));

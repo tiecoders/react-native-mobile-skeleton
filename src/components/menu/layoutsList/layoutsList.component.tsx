@@ -1,4 +1,5 @@
 import React from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {
   Dimensions,
   ListRenderItemInfo,
@@ -67,9 +68,9 @@ export const LayoutsList = withStyles(LayoutsListComponent, (theme: ThemeType) =
   container: {},
   item: {
     flex: 1,
-    height: 160,
+    height: scale(160),
     maxWidth: itemWidth,
-    marginHorizontal: 8,
-    marginVertical: 8,
+    marginHorizontal: scale(8),
+    marginVertical: scale(8),
   },
 }));

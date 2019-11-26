@@ -1,4 +1,5 @@
 import React from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import { ImageProps } from 'react-native';
 import {
   StyleType,
@@ -59,12 +60,12 @@ export const ComponentsListItem = withStyles(ComponentsListItemComponent, (theme
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    borderRadius: 8,
-    paddingHorizontal: 16,
+    borderRadius: moderateScale(8),
+    paddingHorizontal: moderateScale(16),
     paddingVertical: 0,
   },
   icon: {
-    width: 80,
-    height: 80,
+    width: scale(80),
+    height: scale(80),
   },
 }));

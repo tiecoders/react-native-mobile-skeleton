@@ -1,4 +1,5 @@
 import React from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {
   View,
   ViewProps,
@@ -78,7 +79,7 @@ export const ThemeCard = withStyles(ThemeCardComponent, (theme: ThemeType) => ({
   container: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    borderRadius: 8,
+    borderRadius: moderateScale(8),
     overflow: 'hidden',
   },
   headerContainer: {
@@ -86,7 +87,7 @@ export const ThemeCard = withStyles(ThemeCardComponent, (theme: ThemeType) => ({
     alignItems: 'center',
   },
   colorContainer: {
-    marginTop: 24,
+    marginTop: scale(24),
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -94,10 +95,10 @@ export const ThemeCard = withStyles(ThemeCardComponent, (theme: ThemeType) => ({
     flex: 1,
   },
   colorItem: {
-    width: 40,
-    height: 40,
-    borderRadius: 6,
-    marginHorizontal: 2,
+    width: scale(40),
+    height: scale(40),
+    borderRadius: moderateScale(6),
+    marginHorizontal: scale(2),
   },
   colorItem1: {
     backgroundColor: theme['background-basic-color-2'],

@@ -15,14 +15,19 @@ import {routes} from '../../config'
 const MainNavigationConfiguration: NavigationRouteConfigMap<any, NavigationStackProp> = routes.navigation;
 
 const BottomMenuNavigator = createBottomTabNavigator(routes.bottom,{
-    tabBarComponent: MenuContainer
+    tabBarComponent: MenuContainer,
+    defaultNavigationOptions: MenuNavigationOptions
 });
 
 const AppNavigator: NavigationContainer = createStackNavigator({
+    BottomMenuNavigator,
     ...MainNavigationConfiguration,
-    BottomMenuNavigator
 }, {
-    defaultNavigationOptions: MenuNavigationOptions
+    headerMode: 'screen',
+    initialRouteName: 'signIn',
+    defaultNavigationOptions: {
+        header: null
+    }
 })
 
 const createAppRouter = (container: NavigationContainer): NavigationContainer => {

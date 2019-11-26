@@ -4,7 +4,7 @@ import {SignInScreen} from "../components/screens/SignInScreen/SignInScreen";
 const routes = {
     navigation: {
         signIn: SignInScreen,
-        home: HomeScreen,
+        home: HomeScreen
     },
     bottom:{
         home: HomeScreen

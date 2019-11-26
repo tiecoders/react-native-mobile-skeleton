@@ -1,4 +1,5 @@
 import React from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import { ImageProps } from 'react-native';
 import {
   StyleType,
@@ -57,16 +58,16 @@ export const LayoutsListItem = withStyles(LayoutsListItemComponent, (theme: Them
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    borderRadius: 8,
+    borderRadius: moderateScale(8),
     paddingHorizontal: 0,
     paddingVertical: 0,
   },
   icon: {
-    width: 64,
-    height: 64,
+    width: scale(64),
+    height: scale(64),
   },
   title: {
-    marginTop: 8,
+    marginTop: scale(8),
     ...textStyle.subtitle,
   },
 }));
