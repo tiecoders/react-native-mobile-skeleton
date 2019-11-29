@@ -18,6 +18,7 @@ import {
     PasswordValidator,
 } from '../../../core/validators';
 import { SignInFormData } from './type';
+import translate from "../../../services/translation";
 
 interface ComponentProps {
     /**
@@ -85,8 +86,8 @@ class SignInFormComponent extends React.Component<SignInFormProps, State> {
                     style={themedStyle.emailInput}
                     textStyle={textStyle.paragraph}
                     labelStyle={textStyle.label}
-                    label='EMAIL'
-                    placeholder='Email'
+                    label={translate('EMAIL')}
+                    placeholder={translate('EMAIL')}
                     validator={EmailValidator}
                     onChangeText={this.onEmailInputTextChange}
                 />
@@ -95,8 +96,8 @@ class SignInFormComponent extends React.Component<SignInFormProps, State> {
                     textStyle={textStyle.paragraph}
                     labelStyle={textStyle.label}
                     secureTextEntry={true}
-                    placeholder='Password'
-                    label='PASSWORD'
+                    placeholder={translate('PASSWORD')}
+                    label={translate('PASSWORD')}
                     validator={PasswordValidator}
                     onChangeText={this.onPasswordInputTextChange}
                 />

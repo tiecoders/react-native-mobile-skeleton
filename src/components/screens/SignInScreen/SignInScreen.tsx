@@ -7,6 +7,7 @@ import {
     ImageProps,
     View,
 } from 'react-native';
+import translate from "../../../services/translation";
 import {ScrollableAvoidKeyboard, textStyle} from "../../common";
 import {imageSignIn1Bg, ImageSource} from "../../../assets/images";
 import {SignInForm} from "./signInForm";
@@ -28,18 +29,34 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
         return HeartIconFill({ ...style, ...themedStyle.ewaButtonIcon });
     };
 
-    private onEwaButtonPress = () => {
-        // do Something Here
-    };
-
     private renderSignUpButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
         const { themedStyle } = this.props;
 
         return ArrowForwardIconOutline({ ...style, ...themedStyle.signUpButtonIcon });
     };
 
+    private onLogoButtonPress = () => {
+        alert('onLogoButtonPress')
+    };
+
+    private onSignInButtonPress = () => {
+        alert('onSignInButtonPress')
+    };
+
     private onSignUpButtonPress = () => {
-        // SEND SIGN IN REQUEST
+        alert('onSignUpButtonPress')
+    };
+
+    private onGoogleButtonPress = () => {
+        alert('onGoogleButtonPress')
+    };
+
+    private onFacebookButtonPress = () => {
+        alert('onFacebookButtonPress')
+    };
+
+    private onTwitterButtonPress = () => {
+        alert('onTwitterButtonPress')
     };
 
     public render(): React.ReactNode {
@@ -58,14 +75,14 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
                         size='large'
                         activeOpacity={0.75}
                         icon={this.renderEwaButtonIcon}
-                        onPress={this.onEwaButtonPress}>
-                        EWA
+                        onPress={this.onLogoButtonPress}>
+                        {translate('APP_NAME')}
                     </Button>
                     <View style={themedStyle.signInContainer}>
                         <Text
                             style={themedStyle.signInLabel}
                             category='h4'>
-                            SIGN IN
+                            {translate('SIGN_IN')}
                         </Text>
                         <Button
                             style={themedStyle.signUpButton}
@@ -75,7 +92,7 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
                             size='giant'
                             icon={this.renderSignUpButtonIcon}
                             onPress={this.onSignUpButtonPress}>
-                            Sign Up
+                            {translate('SIGN_UP')}
                         </Button>
                     </View>
                     <SignInForm />
@@ -84,13 +101,13 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
                         textStyle={textStyle.button}
                         style={themedStyle.signInButton}
                         onPress={this.onSignInButtonPress}>
-                        SIGN IN
+                        {translate('SIGN_IN')}
                     </Button>
                     <SocialAuth
                         style={themedStyle.socialAuthContainer}
                         iconStyle={themedStyle.socialAuthIcon}
                         hintStyle={themedStyle.socialAuthHint}
-                        hint='Sign with a social account'
+                        hint={translate('SIGN_IN_WITH_SOCIAL_ACCOUNT')}
                         onGooglePress={this.onGoogleButtonPress}
                         onFacebookPress={this.onFacebookButtonPress}
                         onTwitterPress={this.onTwitterButtonPress}
