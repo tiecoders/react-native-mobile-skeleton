@@ -15,9 +15,9 @@ import {SocialAuth} from "../../../core/auth/socialAuth";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {NavigationStackProp} from "react-navigation-stack";
+import firebaseService from "../../../services/firebaseService";
+import facebookService from "../../../services/facebookService";
 import globals from "../../../config/globals"
-import * as Facebook from 'expo-facebook';
-import firebase from "../../../services/firebase";
 
 export type SignInScreenProps = ThemedComponentProps & NavigationStackProp;
 
@@ -26,28 +26,21 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
     private backgroundImage: ImageSource = imageSignIn1Bg;
 
     componentDidMount = () => {
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user != null) {
-                // @ts-ignore
-                this.props.navigation.navigate({
-                    routeName: 'home'
-                });
-            }
-        })
+        firebaseService.onStateChangedEvent(() => this['props'].navigation.navigate({routeName: globals.navigation.redirectAfterLogIn}));
     }
 
     private renderEwaButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
         // @ts-ignore
-        const { themedStyle } = this.props;
+        const {themedStyle} = this.props;
 
-        return HeartIconFill({ ...style, ...themedStyle.ewaButtonIcon });
+        return HeartIconFill({...style, ...themedStyle.ewaButtonIcon});
     };
 
     private renderSignUpButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
         // @ts-ignore
-        const { themedStyle } = this.props;
+        const {themedStyle} = this.props;
 
-        return ArrowForwardIconOutline({ ...style, ...themedStyle.signUpButtonIcon });
+        return ArrowForwardIconOutline({...style, ...themedStyle.signUpButtonIcon});
     };
 
     private onLogoButtonPress = () => {
@@ -67,20 +60,13 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
     };
 
     private onFacebookButtonPress = async () => {
-        const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-            globals.facebook.appId,
-            { permissions: ['public_profile'] }
-        );
+        // @ts-ignore
+        const {type, token} = await facebookService.logInWithReadPermissionsAsync();
 
         if (type === 'success') {
-            // Build Firebase credential with the Facebook access token.
-            const credential = firebase.auth.FacebookAuthProvider.credential(token);
-
-            // Sign in with credential from the Facebook user.
-            firebase.auth().signInWithCredential(credential).catch((error) => {
-                // Handle Errors here.
-                alert('Errors here: ' + error)
-            });
+            firebaseService.signInWithCredential(token);
+        } else {
+            console.log('login failed:' + type);
         }
     };
 
@@ -90,7 +76,7 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
 
     public render(): React.ReactNode {
         // @ts-ignore
-        const { themedStyle } = this.props;
+        const {themedStyle} = this.props;
 
         return (
             <ScrollableAvoidKeyboard>
@@ -124,7 +110,7 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
                             {translate('SIGN_UP')}
                         </Button>
                     </View>
-                    <SignInForm />
+                    <SignInForm/>
                     <Button
                         size='large'
                         textStyle={textStyle.button}
@@ -153,8 +139,7 @@ const mapStateToProps = state => ({
     user: state.user
 });
 
-const mapDispatchToProps = dispatch => ({
-});
+const mapDispatchToProps = dispatch => ({});
 
 const enhance = compose(
     connect(

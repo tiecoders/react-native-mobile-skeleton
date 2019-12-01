@@ -3,6 +3,7 @@ import SignInScreen from "../components/screens/SignInScreen/SignInScreen";
 import SignUpScreen from "../components/screens/SignUpScreen";
 
 const routes = {
+    redirectAfterLogIn: 'home',
     navigation: {
         signIn: SignInScreen,
         signUp: SignUpScreen,
