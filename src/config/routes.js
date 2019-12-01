@@ -1,5 +1,5 @@
 import HomeScreen from "../components/screens/HomeScreen";
-import {SignInScreen} from "../components/screens/SignInScreen/SignInScreen";
+import SignInScreen from "../components/screens/SignInScreen/SignInScreen";
 import SignUpScreen from "../components/screens/SignUpScreen";
 
 const routes = {

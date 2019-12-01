@@ -1,5 +1,4 @@
 import React from 'react'
-import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {Button, State, StyleType, Text, ThemedComponentProps, ThemeType, withStyles} from "react-native-ui-kitten";
 import styles from './styles'
 import {
@@ -13,23 +12,39 @@ import {imageSignIn1Bg, ImageSource} from "../../../assets/images";
 import {SignInForm} from "./signInForm";
 import {ArrowForwardIconOutline, HeartIconFill} from "../../../assets/icons";
 import {SocialAuth} from "../../../core/auth/socialAuth";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {NavigationStackProp} from "react-navigation-stack";
+import globals from "../../../config/globals"
+import * as Facebook from 'expo-facebook';
+import firebase from "../../../services/firebase";
 
-interface ComponentProps {
-}
-
-export type SignInScreenProps = ThemedComponentProps & ComponentProps;
+export type SignInScreenProps = ThemedComponentProps & NavigationStackProp;
 
 class SignInComponent extends React.Component<SignInScreenProps, State> {
 
     private backgroundImage: ImageSource = imageSignIn1Bg;
 
+    componentDidMount = () => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user != null) {
+                // @ts-ignore
+                this.props.navigation.navigate({
+                    routeName: 'home'
+                });
+            }
+        })
+    }
+
     private renderEwaButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+        // @ts-ignore
         const { themedStyle } = this.props;
 
         return HeartIconFill({ ...style, ...themedStyle.ewaButtonIcon });
     };
 
     private renderSignUpButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+        // @ts-ignore
         const { themedStyle } = this.props;
 
         return ArrowForwardIconOutline({ ...style, ...themedStyle.signUpButtonIcon });
@@ -51,8 +66,22 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
         alert('onGoogleButtonPress')
     };
 
-    private onFacebookButtonPress = () => {
-        alert('onFacebookButtonPress')
+    private onFacebookButtonPress = async () => {
+        const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+            globals.facebook.appId,
+            { permissions: ['public_profile'] }
+        );
+
+        if (type === 'success') {
+            // Build Firebase credential with the Facebook access token.
+            const credential = firebase.auth.FacebookAuthProvider.credential(token);
+
+            // Sign in with credential from the Facebook user.
+            firebase.auth().signInWithCredential(credential).catch((error) => {
+                // Handle Errors here.
+                alert('Errors here: ' + error)
+            });
+        }
     };
 
     private onTwitterButtonPress = () => {
@@ -118,59 +147,20 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
     }
 }
 
-export const SignInScreen = withStyles(SignInComponent, (theme: ThemeType) => ({
-    container: {
-        flex: 1,
-        paddingVertical: scale(24),
-        paddingHorizontal: scale(16),
-    },
-    signInButton: {
-        marginTop: scale(8)
-    },
-    signInContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: scale(24),
-    },
-    socialAuthContainer: {
-        marginTop: scale(48),
-    },
-    ewaButton: {
-        maxWidth: scale(72),
-        paddingHorizontal: 0,
-    },
-    ewaButtonText: {
-        color: 'white',
-        ...textStyle.button,
-    },
-    ewaButtonIcon: {
-        marginHorizontal: 0,
-        tintColor: 'white',
-    },
-    formContainer: {
-        flex: 1,
-        marginTop: scale(48),
-    },
-    signInLabel: {
-        flex: 1,
-        ...textStyle.headline,
-        color: 'white',
-    },
-    signUpButton: {
-        flexDirection: 'row-reverse',
-        paddingHorizontal: 0,
-    },
-    signUpButtonText: {
-        color: 'white',
-    },
-    signUpButtonIcon: {
-        marginHorizontal: 0,
-        tintColor: 'white',
-    },
-    socialAuthIcon: {
-        tintColor: 'white',
-    },
-    socialAuthHint: {
-        color: 'white',
-    },
-}));
+const SignInScreen = withStyles(SignInComponent, (theme: ThemeType) => styles);
+
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+});
+
+const enhance = compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+);
+
+export default enhance(SignInScreen)

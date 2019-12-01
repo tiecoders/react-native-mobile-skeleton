@@ -1,3 +1,8 @@
+import React from 'react'
 import SignInScreen from './SignInScreen'
 
-export default SignInScreen
+class SignInScreenContainer extends React.Component{
+    render = () => <SignInScreen />
+}
+
+export default SignInScreenContainer

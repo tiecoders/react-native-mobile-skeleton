@@ -13,6 +13,8 @@
     "@ui-kitten/eva-icons": "^4.2.0",
     "expo": "^35.0.0",
     "expo-analytics": "^1.0.13",
+    "expo-facebook": "^7.0.0",
+    "firebase": "^7.5.0",
     "lodash": "^4.17.15",
     "react": "16.8.3",
     "react-dom": "16.8.3",

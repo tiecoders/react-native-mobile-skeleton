@@ -1,5 +1,4 @@
 import base from './SignInScreen.style'
+import {textStyle} from "../../../common";
 
-export default {
-    default: base
-}
+export default base

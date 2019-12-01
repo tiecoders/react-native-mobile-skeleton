@@ -10,7 +10,7 @@ import {
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 import {MenuNavigationOptions} from "./options";
 import {MenuContainer} from "../../containers/menu";
-import {routes} from '../../config'
+import routes from '../../config/routes'
 
 const MainNavigationConfiguration: NavigationRouteConfigMap<any, NavigationStackProp> = routes.navigation;
 
