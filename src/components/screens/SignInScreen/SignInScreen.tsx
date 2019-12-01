@@ -26,7 +26,9 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
     private backgroundImage: ImageSource = imageSignIn1Bg;
 
     componentDidMount = () => {
-        firebaseService.onStateChangedEvent(() => this['props'].navigation.navigate({routeName: globals.navigation.redirectAfterLogIn}));
+        firebaseService.onStateChangedEvent(user => {
+            if (user !== null) this['props'].navigation.navigate({routeName: globals.navigation.redirectAfterLogIn})
+        });
     }
 
     private renderEwaButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
