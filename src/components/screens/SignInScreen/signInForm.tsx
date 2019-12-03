@@ -52,19 +52,24 @@ class SignInFormComponent extends React.Component<SignInFormProps, State> {
         const remainValid: boolean = oldFormValid && newFormValid;
 
         if (becomeValid) {
+            // @ts-ignore
             this.props.onDataChange(this.state);
         } else if (becomeInvalid) {
+            // @ts-ignore
             this.props.onDataChange(undefined);
         } else if (isStateChanged && remainValid) {
+            // @ts-ignore
             this.props.onDataChange(this.state);
         }
     }
 
     private onEmailInputTextChange = (email: string) => {
+        // @ts-ignore
         this.setState({ email });
     };
 
     private onPasswordInputTextChange = (password: string) => {
+        // @ts-ignore
         this.setState({ password });
     };
 
@@ -76,6 +81,7 @@ class SignInFormComponent extends React.Component<SignInFormProps, State> {
     };
 
     public render(): React.ReactNode {
+        // @ts-ignore
         const { style, themedStyle, theme, ...restProps } = this.props;
 
         return (

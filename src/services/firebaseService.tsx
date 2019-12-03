@@ -12,14 +12,24 @@ class firebaseService {
         this._instance.database().ref('users/' + uid).set(data)
     }
 
-    public onStateChangedEvent = callback => this._instance.auth().onAuthStateChanged(user => callback(user))
-
+    public onStateChangedEvent = (navigation, signInRequired) => {
+        this._instance.auth().onAuthStateChanged(user => {
+            console.log('user: ' + (user !== null ? 'yes' : 'no') + ' and signIsRequired : ' + signInRequired)
+            if (user !== null && signInRequired === false) {
+                console.log('yes')
+                navigation.navigate({routeName: globals.navigation.redirectAfterLogIn})
+            } else if (user === null && signInRequired === true) {
+                console.log('no')
+                navigation.navigate({routeName: globals.navigation.initialRouteKey})
+            }
+        });
+    }
+    
     public getFacebookAuthProvider = token => this._instance.auth.FacebookAuthProvider.credential(token);
 
     public signInWithCredential = token => {
         const credential = this.getFacebookAuthProvider(token);
         this._instance.auth().signInWithCredential(credential).then((credential) => {
-            console.log(credential)
             const UserInfo = credential.additionalUserInfo;
             const user = credential.user;
 
@@ -44,6 +54,10 @@ class firebaseService {
             // Handle Errors here.
             alert('Errors here: ' + error)
         });
+    }
+
+    public signOut = () => {
+        this._instance.auth().signOut();
     }
 }
 

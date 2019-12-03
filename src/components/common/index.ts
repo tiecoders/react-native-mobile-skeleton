@@ -11,3 +11,8 @@ export {
   ScrollableAvoidKeyboard,
   ScrollableAvoidKeyboardProps,
 } from './scrollableAvoidKeyboard.component';
+
+export {
+  ImageOverlay,
+  ImageOverlayProps,
+} from './imageOverlay.component';

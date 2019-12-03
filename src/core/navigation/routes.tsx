@@ -11,6 +11,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs'
 import {MenuNavigationOptions} from "./options";
 import {MenuContainer} from "../../containers/menu";
 import routes from '../../config/routes'
+import globals from '../../config/globals'
 
 const MainNavigationConfiguration: NavigationRouteConfigMap<any, NavigationStackProp> = routes.navigation;
 
@@ -24,7 +25,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
     ...MainNavigationConfiguration,
 }, {
     headerMode: 'screen',
-    initialRouteName: 'signIn',
+    initialRouteName: globals.navigation.initialRouteKey,
     defaultNavigationOptions: {
         header: null
     }

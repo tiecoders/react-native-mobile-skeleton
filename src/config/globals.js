@@ -4,7 +4,8 @@ const globals = {
         timeout: 10000
     },
     navigation: {
-        redirectAfterLogIn: 'home'
+        redirectAfterLogIn: 'home',
+        initialRouteKey: 'signIn'
     },
     source: null,
     facebook: {

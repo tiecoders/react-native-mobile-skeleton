@@ -21,6 +21,8 @@ import {
     TwitterIconFill,
 } from '../../../assets/icons';
 import {SocialButton} from './socialAuthButton.component';
+import facebookService from "../../../services/facebookService";
+import firebaseService from "../../../services/firebaseService";
 
 interface ComponentProps {
     hint?: string;
@@ -34,6 +36,25 @@ interface ComponentProps {
 export type SocialAuthProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 class SocialAuthComponent extends React.Component<SocialAuthProps> {
+
+    private onFacebookButtonPress = async () => {
+        // @ts-ignore
+        const {type, token} = await facebookService.logInWithReadPermissionsAsync();
+
+        if (type === 'success') {
+            firebaseService.signInWithCredential(token);
+        } else {
+            console.log('login failed:' + type);
+        }
+    };
+
+    private onGoogleButtonPress = () => {
+        alert('onGoogleButtonPress')
+    };
+
+    private onTwitterButtonPress = () => {
+        alert('onTwitterButtonPress')
+    };
 
     private renderCaptionElement = (style: StyleProp<TextStyle>): React.ReactElement<TextProps> => {
         const {hint} = this['props'];
@@ -58,19 +79,19 @@ class SocialAuthComponent extends React.Component<SocialAuthProps> {
                         activeOpacity={0.75}
                         icon={GoogleIconFill}
                         iconStyle={iconStyle}
-                        onPress={this["props"].onGooglePress}
+                        onPress={this.onGoogleButtonPress}
                     />
                     <SocialButton
                         activeOpacity={0.75}
                         icon={FacebookIconFill}
                         iconStyle={iconStyle}
-                        onPress={this['props'].onFacebookPress}
+                        onPress={this.onFacebookButtonPress}
                     />
                     <SocialButton
                         activeOpacity={0.75}
                         icon={TwitterIconFill}
                         iconStyle={iconStyle}
-                        onPress={this['props'].onTwitterPress}
+                        onPress={this.onTwitterButtonPress}
                     />
                 </View>
             </View>

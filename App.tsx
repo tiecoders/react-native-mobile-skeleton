@@ -60,6 +60,7 @@ class ApplicationContent extends React.Component {
 }
 
 class App extends React.Component {
+
     public render(): React.ReactNode {
         const contextValue: ThemeContextType = {
             currentTheme: 'Eva Light'

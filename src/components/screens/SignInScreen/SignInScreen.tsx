@@ -16,20 +16,16 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {NavigationStackProp} from "react-navigation-stack";
 import firebaseService from "../../../services/firebaseService";
-import facebookService from "../../../services/facebookService";
-import globals from "../../../config/globals"
 
 export type SignInScreenProps = ThemedComponentProps & NavigationStackProp;
 
 class SignInComponent extends React.Component<SignInScreenProps, State> {
 
-    private backgroundImage: ImageSource = imageSignIn1Bg;
-
     componentDidMount = () => {
-        firebaseService.onStateChangedEvent(user => {
-            if (user !== null) this['props'].navigation.navigate({routeName: globals.navigation.redirectAfterLogIn})
-        });
+        firebaseService.onStateChangedEvent(this['props'].navigation, false);
     }
+
+    private backgroundImage: ImageSource = imageSignIn1Bg;
 
     private renderEwaButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
         // @ts-ignore
@@ -54,26 +50,7 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
     };
 
     private onSignUpButtonPress = () => {
-        alert('onSignUpButtonPress')
-    };
-
-    private onGoogleButtonPress = () => {
-        alert('onGoogleButtonPress')
-    };
-
-    private onFacebookButtonPress = async () => {
-        // @ts-ignore
-        const {type, token} = await facebookService.logInWithReadPermissionsAsync();
-
-        if (type === 'success') {
-            firebaseService.signInWithCredential(token);
-        } else {
-            console.log('login failed:' + type);
-        }
-    };
-
-    private onTwitterButtonPress = () => {
-        alert('onTwitterButtonPress')
+        this['props'].navigation.navigate({routeName: 'signUp'});
     };
 
     public render(): React.ReactNode {
@@ -125,9 +102,6 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
                         iconStyle={themedStyle.socialAuthIcon}
                         hintStyle={themedStyle.socialAuthHint}
                         hint={translate('SIGN_IN_WITH_SOCIAL_ACCOUNT')}
-                        onGooglePress={this.onGoogleButtonPress}
-                        onFacebookPress={this.onFacebookButtonPress}
-                        onTwitterPress={this.onTwitterButtonPress}
                     />
                 </ImageBackground>
             </ScrollableAvoidKeyboard>
