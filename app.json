@@ -24,7 +24,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tiecoders.casansservices",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.478495107335-8otokt8d1cq8qdpfgr6j1tr8roc6ka78"
+        }
+      }
+    },
+    "android": {
+      "package": "com.tiecoders.casansservices",
+      "googleServicesFile": "./google-services.json"
     }
   }
 }

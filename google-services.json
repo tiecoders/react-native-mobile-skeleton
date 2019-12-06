@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "478495107335",
+    "firebase_url": "https://casa-ns.firebaseio.com",
+    "project_id": "casa-ns",
+    "storage_bucket": "casa-ns.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478495107335:android:0810ebeb18192eb1007da2",
+        "android_client_info": {
+          "package_name": "com.tiecoders.casansservices"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478495107335-gcm8gt8umg46fpdfsj6ku98frjrl95rr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9AkLjwNZd60gZOTKj4LORUHGIgHQtRY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478495107335-gcm8gt8umg46fpdfsj6ku98frjrl95rr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "478495107335-91lcokomppusdujg6tbboh6e0hautp7g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tiecoders.casa-ns-services"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

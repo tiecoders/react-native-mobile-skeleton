@@ -1,11 +1,11 @@
 import React from 'react'
-import {Button, State, StyleType, Text, ThemedComponentProps, ThemeType, withStyles} from "react-native-ui-kitten";
 import styles from './styles'
 import {
     ImageBackground,
     ImageProps,
-    View,
+    View
 } from 'react-native';
+import {Button, State, StyleType, Text, ThemedComponentProps, ThemeType, withStyles} from "react-native-ui-kitten";
 import translate from "../../../services/translation";
 import {ScrollableAvoidKeyboard, textStyle} from "../../common";
 import {imageSignIn1Bg, ImageSource} from "../../../assets/images";
@@ -50,7 +50,7 @@ class SignInComponent extends React.Component<SignInScreenProps, State> {
     };
 
     private onSignUpButtonPress = () => {
-        this['props'].navigation.navigate({routeName: 'signUp'});
+        this['props'].navigation.navigate('signUp');
     };
 
     public render(): React.ReactNode {

@@ -20,6 +20,7 @@ import {
     PasswordValidator,
 } from '../../../core/validators';
 import { SignUpFormData } from './type';
+import translate from "../../../services/translation";
 
 interface ComponentProps {
     /**
@@ -129,8 +130,8 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
                 <ValidationInput
                     style={[themedStyle.input, themedStyle.firstNameInput]}
                     textStyle={themedStyle.inputText}
-                    placeholder='Ally'
-                    label='FIRST NAME'
+                    placeholder={translate('FIRST_NAME_EXAMPLE')}
+                    label={translate('FIRST_NAME')}
                     autoCapitalize='words'
                     validator={NameValidator}
                     onChangeText={this.onFirstNameInputTextChange}
@@ -139,8 +140,8 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
                     style={themedStyle.input}
                     textStyle={textStyle.paragraph}
                     labelStyle={textStyle.label}
-                    placeholder='Watsan'
-                    label='LAST NAME'
+                    placeholder={translate('FIRST_NAME_EXAMPLE')}
+                    label={translate('FIRST_NAME')}
                     autoCapitalize='words'
                     validator={NameValidator}
                     onChangeText={this.onLastNameValidationResult}
@@ -149,8 +150,8 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
                     style={themedStyle.input}
                     textStyle={textStyle.paragraph}
                     labelStyle={textStyle.label}
-                    placeholder='18/10/1995'
-                    label='DATE OF BIRTHDAY'
+                    placeholder={translate('BIRTH_DAY_EXAMPLE')}
+                    label={translate('BIRTH_DAY')}
                     validator={DOBValidator}
                     onChangeText={this.onDateInputTextChange}
                 />
@@ -158,8 +159,8 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
                     style={themedStyle.input}
                     textStyle={themedStyle.inputText}
                     labelStyle={themedStyle.inputLabel}
-                    placeholder='ally.watsan@gmail.com'
-                    label='EMAIL'
+                    placeholder={translate('EMAIL_EXAMPLE')}
+                    label={translate('EMAIL')}
                     validator={EmailValidator}
                     onChangeText={this.onEmailInputTextChange}
                 />
@@ -168,8 +169,8 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
                     textStyle={textStyle.paragraph}
                     labelStyle={textStyle.label}
                     captionTextStyle={textStyle.paragraph}
-                    label='PASSWORD'
-                    placeholder='Password'
+                    label={translate('PASSWORD')}
+                    placeholder={translate('PASSWORD')}
                     caption={this.passwordCaption()}
                     secureTextEntry={true}
                     validator={PasswordValidator}
@@ -179,7 +180,7 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
                     style={themedStyle.termsCheckBox}
                     textStyle={themedStyle.termsCheckBoxText}
                     checked={this.state.termsAccepted}
-                    text={'By creating an account, I agree to the Ewa Terms of\nUse and Privacy Policy'}
+                    text={translate('SIGN_UP_CHECKBOX_CGU_LABEL')}
                     onChange={this.onTermsAcceptChange}
                 />
             </View>

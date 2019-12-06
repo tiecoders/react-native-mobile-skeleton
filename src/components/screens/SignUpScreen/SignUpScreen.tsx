@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     ImageProps,
-    View,
+    View
 } from 'react-native';
 import {Button, State, StyleType, Text, ThemedComponentProps, ThemeType, withStyles} from "react-native-ui-kitten"
 import styles from './styles'
@@ -16,6 +16,7 @@ import {ArrowForwardIconOutline, HeartIconFill} from "../../../assets/icons";
 import {SignUpFormData} from "./type";
 import {compose} from "redux";
 import firebaseService from "../../../services/firebaseService";
+import translate from "../../../services/translation";
 
 export type SignUpScreenProps = ThemedComponentProps & NavigationStackProp;
 
@@ -47,7 +48,7 @@ class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
     };
 
     private onSignInButtonPress = () => {
-        this['props'].navigation.navigate({routeName: 'signIn'});
+        this['props'].navigation.navigate('signIn');
     };
 
     private onFormDataChange = (formData: SignUpFormData) => {
@@ -77,13 +78,13 @@ class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
                         activeOpacity={0.75}
                         icon={this.renderEwaButtonIcon}
                         onPress={this.onEwaButtonPress}>
-                        EWA
+                        {translate('APP_NAME')}
                     </Button>
                     <View style={themedStyle.signUpContainer}>
                         <Text
                             style={themedStyle.signInLabel}
                             category='h4'>
-                            SIGN UP
+                            {translate('SIGN_UP')}
                         </Text>
                         <Button
                             style={themedStyle.signInButton}
@@ -93,7 +94,7 @@ class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
                             activeOpacity={0.75}
                             icon={this.renderSignInButtonIcon}
                             onPress={this.onSignInButtonPress}>
-                            Sign In
+                            {translate('SIGN_IN')}
                         </Button>
                     </View>
                 </ImageOverlay>
@@ -101,20 +102,20 @@ class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
                     style={themedStyle.socialAuthContainer}
                     hintStyle={themedStyle.socialAuthHint}
                     iconStyle={themedStyle.socialAuthIcon}
-                    hint='Sign with a social account'
+                    hint={translate('SIGN_UP_WITH_SOCIAL_ACCOUNT')}
                 />
                 <View style={themedStyle.orContainer}>
                     <View style={themedStyle.divider}/>
                     <Text
                         style={themedStyle.orLabel}
                         category='h5'>
-                        OR
+                        {translate('OR')}
                     </Text>
                     <View style={themedStyle.divider}/>
                 </View>
                 <Text
                     style={themedStyle.emailSignLabel}>
-                    Sign up with Email
+                    {translate('SIGN_UP_WITH_EMAIL')}
                 </Text>
                 <SignUpForm
                     style={themedStyle.formContainer}
@@ -127,7 +128,7 @@ class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
                     // @ts-ignore
                     disabled={true}
                     onPress={this.onSignUpButtonPress}>
-                    SIGN UP
+                    {translate('SIGN_UP')}
                 </Button>
             </ScrollableAvoidKeyboard>)
     }

@@ -10,22 +10,46 @@ class firebaseService {
 
     public pushNewUser = (uid, data) => {
         this._instance.database().ref('users/' + uid).set(data)
-    }
+    };
 
     public onStateChangedEvent = (navigation, signInRequired) => {
         this._instance.auth().onAuthStateChanged(user => {
-            console.log('user: ' + (user !== null ? 'yes' : 'no') + ' and signIsRequired : ' + signInRequired)
+            console.log('user: ' + (user !== null ? 'yes' : 'no') + ' and signIsRequired : ' + signInRequired);
             if (user !== null && signInRequired === false) {
-                console.log('yes')
+                console.log('yes');
                 navigation.navigate({routeName: globals.navigation.redirectAfterLogIn})
             } else if (user === null && signInRequired === true) {
-                console.log('no')
+                console.log('no');
                 navigation.navigate({routeName: globals.navigation.initialRouteKey})
             }
         });
-    }
+    };
     
     public getFacebookAuthProvider = token => this._instance.auth.FacebookAuthProvider.credential(token);
+
+    public signInWithGoogle = () => {
+        alert('initiated')
+        let provider = new this._instance.auth.GoogleAuthProvider;
+        this._instance.auth().signInWithPopup(provider).then(function(result) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            // @ts-ignore
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+
+            alert('done')
+            // ...
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        }).catch(() => { alert('dd') });
+    };
 
     public signInWithCredential = token => {
         const credential = this.getFacebookAuthProvider(token);
@@ -46,7 +70,7 @@ class firebaseService {
                     },
                     email: user.email,
                     birthday: UserInfo.profile["birthday"]
-                }
+                };
 
                 this.pushNewUser(user.uid, data)
             }
@@ -54,7 +78,7 @@ class firebaseService {
             // Handle Errors here.
             alert('Errors here: ' + error)
         });
-    }
+    };
 
     public signOut = () => {
         this._instance.auth().signOut();

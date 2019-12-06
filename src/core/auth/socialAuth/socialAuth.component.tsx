@@ -23,6 +23,7 @@ import {
 import {SocialButton} from './socialAuthButton.component';
 import facebookService from "../../../services/facebookService";
 import firebaseService from "../../../services/firebaseService";
+import googleSignInService from "../../../services/googleSignInService";
 
 interface ComponentProps {
     hint?: string;
@@ -49,7 +50,7 @@ class SocialAuthComponent extends React.Component<SocialAuthProps> {
     };
 
     private onGoogleButtonPress = () => {
-        alert('onGoogleButtonPress')
+        googleSignInService.signInAsync();
     };
 
     private onTwitterButtonPress = () => {

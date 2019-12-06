@@ -3,6 +3,9 @@ const globals = {
         baseURL: 'http://api.local-project.com/',
         timeout: 10000
     },
+    googleSignIn: {
+        reservedClientId: "com.googleusercontent.apps.478495107335-8otokt8d1cq8qdpfgr6j1tr8roc6ka78"
+    },
     navigation: {
         redirectAfterLogIn: 'home',
         initialRouteKey: 'signIn'
