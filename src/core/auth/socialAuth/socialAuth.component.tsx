@@ -16,22 +16,17 @@ import {
 import {Text} from 'react-native-ui-kitten';
 import {textStyle} from '../../../components/common';
 import {
-    FacebookIconFill,
-    GoogleIconFill,
-    TwitterIconFill,
+    FacebookIconFill
 } from '../../../assets/icons';
 import {SocialButton} from './socialAuthButton.component';
 import facebookService from "../../../services/facebookService";
 import firebaseService from "../../../services/firebaseService";
-import googleSignInService from "../../../services/googleSignInService";
 
 interface ComponentProps {
     hint?: string;
     hintStyle?: StyleProp<TextStyle>;
     iconStyle?: StyleProp<ImageStyle>;
-    onGooglePress: () => void;
     onFacebookPress: () => void;
-    onTwitterPress: () => void;
 }
 
 export type SocialAuthProps = ThemedComponentProps & ViewProps & ComponentProps;
@@ -47,14 +42,6 @@ class SocialAuthComponent extends React.Component<SocialAuthProps> {
         } else {
             console.log('login failed:' + type);
         }
-    };
-
-    private onGoogleButtonPress = () => {
-        googleSignInService.signInAsync();
-    };
-
-    private onTwitterButtonPress = () => {
-        alert('onTwitterButtonPress')
     };
 
     private renderCaptionElement = (style: StyleProp<TextStyle>): React.ReactElement<TextProps> => {
@@ -78,21 +65,9 @@ class SocialAuthComponent extends React.Component<SocialAuthProps> {
                 <View style={buttonContainer}>
                     <SocialButton
                         activeOpacity={0.75}
-                        icon={GoogleIconFill}
-                        iconStyle={iconStyle}
-                        onPress={this.onGoogleButtonPress}
-                    />
-                    <SocialButton
-                        activeOpacity={0.75}
                         icon={FacebookIconFill}
                         iconStyle={iconStyle}
                         onPress={this.onFacebookButtonPress}
-                    />
-                    <SocialButton
-                        activeOpacity={0.75}
-                        icon={TwitterIconFill}
-                        iconStyle={iconStyle}
-                        onPress={this.onTwitterButtonPress}
                     />
                 </View>
             </View>
