@@ -20,6 +20,13 @@ const globals = {
         authDomain: "casa-ns.firebaseapp.com",
         databaseURL: "https://casa-ns.firebaseio.com",
         storageBucket: "casa-ns.appspot.com"
+    },
+    users: {
+        default: {
+            picture_url: '',
+            picture_height: '',
+            picture_width: ''
+        }
     }
 }
 

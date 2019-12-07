@@ -3,7 +3,7 @@ import {
     ImageProps,
     View
 } from 'react-native';
-import {Button, State, StyleType, Text, ThemedComponentProps, ThemeType, withStyles} from "react-native-ui-kitten"
+import {Button, StyleType, Text, ThemedComponentProps, ThemeType, withStyles} from "react-native-ui-kitten"
 import styles from './styles'
 import {NavigationStackProp} from "react-navigation-stack";
 import {ScrollableAvoidKeyboard, textStyle} from "../../common";
@@ -18,15 +18,23 @@ import {compose} from "redux";
 import firebaseService from "../../../services/firebaseService";
 import translate from "../../../services/translation";
 
+interface State {
+    formData: SignUpFormData;
+}
+
 export type SignUpScreenProps = ThemedComponentProps & NavigationStackProp;
 
 class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
 
+    public state: State = {
+        formData: undefined,
+    };
+
+    private backgroundImage: ImageSource = imageSignUp1Bg;
+
     componentDidMount = () => {
         firebaseService.onStateChangedEvent(this['props'].navigation, false);
     }
-
-    private backgroundImage: ImageSource = imageSignUp1Bg;
 
     private renderEwaButtonIcon = (style: StyleType): React.ReactElement<ImageProps> => {
         // @ts-ignore
@@ -58,7 +66,7 @@ class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
 
     private onSignUpButtonPress = () => {
         // @ts-ignore
-        this.props.onSignUpPress(this.state.formData);
+        firebaseService.signUp(this.state.formData);
     };
 
     render = () => {
@@ -126,7 +134,7 @@ class SignUpScreenComponent extends React.Component<SignUpScreenProps, State> {
                     textStyle={textStyle.button}
                     size='large'
                     // @ts-ignore
-                    disabled={true}
+                    disabled={!this.state.formData}
                     onPress={this.onSignUpButtonPress}>
                     {translate('SIGN_UP')}
                 </Button>

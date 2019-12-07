@@ -7,7 +7,8 @@ import {
     ThemedComponentProps,
     ThemeType,
     withStyles,
-    CheckBox
+    CheckBox,
+    Radio
 } from 'react-native-ui-kitten';
 import {
     textStyle,
@@ -33,22 +34,24 @@ interface ComponentProps {
 export type SignUpFormProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 interface State {
-    firstName: string | undefined;
-    lastName: string | undefined;
+    fname: string | undefined;
+    lname: string | undefined;
     date: string | undefined;
     email: string | undefined;
     password: string | undefined;
+    gender: undefined;
     termsAccepted: boolean;
 }
 
 class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
 
     public state: State = {
-        firstName: undefined,
-        lastName: undefined,
+        fname: undefined,
+        lname: undefined,
         date: undefined,
         email: undefined,
         password: undefined,
+        gender: undefined,
         termsAccepted: false,
     };
 
@@ -73,19 +76,27 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
         }
     }
 
-    private onFirstNameInputTextChange = (firstName: string) => {
+    private onFirstNameInputTextChange = (fname: string) => {
         // @ts-ignore
-        this.setState({ firstName });
+        this.setState({
+            fname: 'ahmed',
+            lname: 'hannachi',
+            birthday: '25/02/1992',
+            email: 'a.hannachi@tiecoders.com',
+            password: '25021992++',
+            gender: 'male',
+            termsAccepted: true
+        });
     };
 
-    private onLastNameValidationResult = (lastName: string) => {
+    private onLastNameValidationResult = (lname: string) => {
         // @ts-ignore
-        this.setState({ lastName });
+        this.setState({ lname });
     };
 
-    private onDateInputTextChange = (date: string) => {
+    private onDateInputTextChange = (birthday: string) => {
         // @ts-ignore
-        this.setState({ date });
+        this.setState({ birthday });
     };
 
     private onEmailInputTextChange = (email: string) => {
@@ -103,13 +114,23 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
         this.setState({ termsAccepted });
     };
 
+    private onGenderMaleChange = (gender: boolean) => {
+        // @ts-ignore
+        this.setState({ gender: 'male' });
+    };
+
+    private onGenderFemaleChange = (gender: boolean) => {
+        // @ts-ignore
+        this.setState({ gender: 'female' });
+    };
+
     private isValid = (value: SignUpFormData): boolean => {
         // @ts-ignore
-        const { firstName, lastName, date, email, password, termsAccepted } = value;
+        const { fname, lname, birthday, email, password, termsAccepted } = value;
 
-        return firstName !== undefined
-            && lastName !== undefined
-            && date !== undefined
+        return fname !== undefined
+            && lname !== undefined
+            && birthday !== undefined
             && email !== undefined
             && password !== undefined
             && termsAccepted;
@@ -176,6 +197,20 @@ class SignUpFormComponent extends React.Component<SignUpFormProps, State> {
                     validator={PasswordValidator}
                     onChangeText={this.onPasswordInputTextChange}
                 />
+                <Radio
+                    style={themedStyle.genderRadio}
+                    textStyle={themedStyle.termsCheckBoxText}
+                    text={translate('MALE')}
+                    checked={this.state.gender === 'male'}
+                    onChange={this.onGenderMaleChange}
+                />
+                <Radio
+                    style={themedStyle.genderRadio}
+                    textStyle={themedStyle.termsCheckBoxText}
+                    text={translate('FEMALE')}
+                    checked={this.state.gender === 'female'}
+                    onChange={this.onGenderFemaleChange}
+                />
                 <CheckBox
                     style={themedStyle.termsCheckBox}
                     textStyle={themedStyle.termsCheckBoxText}
@@ -198,6 +233,11 @@ export const SignUpForm = withStyles(SignUpFormComponent, (theme: ThemeType) => 
     },
     termsCheckBox: {
         marginTop: 20,
+    },
+    genderRadio: {
+        marginTop: 20,
+        flex: 1,
+        flexDirection: 'row'
     },
     termsCheckBoxText: {
         fontSize: 11,

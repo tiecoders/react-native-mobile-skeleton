@@ -24,32 +24,38 @@ class firebaseService {
             }
         });
     };
-    
+
     public getFacebookAuthProvider = token => this._instance.auth.FacebookAuthProvider.credential(token);
 
-    public signInWithGoogle = () => {
-        alert('initiated')
-        let provider = new this._instance.auth.GoogleAuthProvider;
-        this._instance.auth().signInWithPopup(provider).then(function(result) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            // @ts-ignore
-            var token = result.credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
+    public signUp = async data => {
+        const result = await this._instance
+            .auth()
+            .createUserWithEmailAndPassword(data.email, data.password)
+            .then(result => {
+                return {uid: result.user.uid, error: null};
+            })
+            .catch(error => {
+                return {uid: null, error: error.code};
+            });
 
-            alert('done')
-            // ...
-        }).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            // ...
-        }).catch(() => { alert('dd') });
-    };
+        if (result.uid) {
+            this.pushNewUser(result.uid, {
+                fname: data.fname,
+                lname: data.lname,
+                gender: data.gender,
+                displayName: `${data.lname} ${data.fname}`,
+                picture: {
+                    url: globals.users.default.picture_url,
+                    height: globals.users.default.picture_height,
+                    width: globals.users.default.picture_width
+                },
+                email: data.email,
+                birthday: data.birthday
+            })
+        }else{
+            console.log(result.error);
+        }
+    }
 
     public signInWithCredential = token => {
         const credential = this.getFacebookAuthProvider(token);
